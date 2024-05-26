@@ -21,13 +21,14 @@ import javax.persistence.Persistence;
  */
 public class CadastroDeProduto {
     public static void main(String[] args) {
-        //cadastrarProduto();
+        // cadastrarProduto();
         Long id = 1l; //Isso é um 1L = 1l
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoDAO produtoDAO = new ProdutoDAO(em);
         Produto p = produtoDAO.buscarPorId(1l);
         System.out.println(p.getPreco());
         
+        // Aqui se torna visivel a importancia de delegar a responsabilidade de pesquisa para a classe DAO
         List<Produto> produtos = produtoDAO.buscarNomeDaCategoria("CELULARES");
         produtos.forEach(f -> System.out.println(f.getNome()));
         
@@ -44,6 +45,7 @@ public class CadastroDeProduto {
         
         Produto celular = new Produto("A Bela e a Fera", "Livro Clássico", new BigDecimal("50"), celulares);
         
+        // Esse bloco se torna padrão quando vamos fazer o commit de um objeto no banco.
         try{
             em.getTransaction().begin();
             
