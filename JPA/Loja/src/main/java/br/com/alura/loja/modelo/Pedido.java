@@ -36,11 +36,10 @@ public class Pedido {
     private LocalDate data = LocalDate.now();
     @ManyToOne
     private Cliente cliente;
-    @OneToMany
+    @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;
 
-    public Pedido() {
-    }
+    public Pedido() {}
 
     public Pedido(Cliente cliente) {
         this.cliente = cliente;
